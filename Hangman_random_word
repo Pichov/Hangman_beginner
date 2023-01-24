@@ -1,0 +1,61 @@
+import random
+
+random_word_list_example = ["green", "dog", "person", "python", "cheese", "doubt", "elephant"]
+word = random.choice(random_word_list_example).upper()
+word_on_screen = "_" * len(word)
+word_on_screen_list = list(word_on_screen)
+same_indexes_in_a_word = []
+win = 0
+play_again = 0
+def Hangman(word):
+    global play_again
+    global answer
+    def Letter_start(word):
+        for i in range(len(word)):
+            if word[0] == word [i]:
+                word_on_screen_list[i] = word [i]
+        return word_on_screen_list
+
+    word_on_screen_list[0] = word[0]
+    word_on_screen_list[-1] = word [-1]
+    Letter_start(word)
+    word_on_screen = word_on_screen_list
+    print("Let's play a game of hangman! Your word is: \n" + " ".join(word_on_screen))
+
+
+
+    while True:
+        user_guess = input("Write a letter: ").upper()
+        if user_guess == word:
+            print("Your guess is correct! The word was: " + word)
+            win = 1
+            break
+        elif user_guess in word:
+            for i, v in enumerate(word):
+                if v == user_guess:
+                    word_on_screen_list[i] = user_guess
+                    word_on_screen = word_on_screen_list
+            print(" ".join(word_on_screen))
+        else:
+            print("This letter is not in the word.")
+            print(*word_on_screen)
+
+        if "_" not in word_on_screen:
+            print("You won!")
+            win = 1
+            break
+    return play_again
+Hangman(word)
+
+
+while True:
+    word = random.choice(random_word_list_example).upper()
+    answer = input("Do you want to play again? (yes/no): ")
+    if answer.lower() in "yes":
+        word_on_screen = "_" * len(word)
+        word_on_screen_list.clear()
+        word_on_screen_list = list(word_on_screen)
+        Hangman(word)
+    if answer.lower() in "no":
+        print("\nThank you for playing!")
+        break
