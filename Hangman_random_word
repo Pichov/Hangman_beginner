@@ -7,30 +7,30 @@ word_on_screen_list = list(word_on_screen)
 same_indexes_in_a_word = []
 win = 0
 play_again = 0
-def Hangman(word):
+
+
+def hangman(word):
     global play_again
     global answer
 
-    def Letter_start(word):
+    def letter_start(word):
         for i in range(len(word)):
-            if word[0] == word [i]:
+            if word[0] == word[i]:
                 word_on_screen_list[i] = word[i]
         return word_on_screen_list
 
-    def Letter_end(word):
+    def letter_end(word):
         for i in range(len(word)):
             if word[-1] == word[i]:
                 word_on_screen_list[i] = word[i]
-        return(word_on_screen_list)
+        return word_on_screen_list
 
     word_on_screen_list[0] = word[0]
-    word_on_screen_list[-1] = word [-1]
-    Letter_start(word)
-    Letter_end(word)
+    word_on_screen_list[-1] = word[-1]
+    letter_start(word)
+    letter_end(word)
     word_on_screen = word_on_screen_list
     print("Let's play a game of hangman! Your word is: \n" + " ".join(word_on_screen))
-
-
 
     while True:
         user_guess = input("Write a letter: ").upper()
@@ -53,7 +53,7 @@ def Hangman(word):
             win = 1
             break
     return play_again
-Hangman(word)
+hangman(word)
 
 
 while True:
@@ -63,7 +63,7 @@ while True:
         word_on_screen = "_" * len(word)
         word_on_screen_list.clear()
         word_on_screen_list = list(word_on_screen)
-        Hangman(word)
+        hangman(word)
     if answer.lower() in "no":
         print("\nThank you for playing!")
         break
